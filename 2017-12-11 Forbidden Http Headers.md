@@ -55,8 +55,6 @@ Fortunately, one of the swashbuckle contributors (thanks if you are reading), go
 * Host
 * Keep-Alive
 * Origin
-* Proxy-
-* Sec-
 * Referer
 * TE
 * Trailer
