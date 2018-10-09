@@ -18,7 +18,7 @@ The parts that I cannot find on an Azure DevOps platform are tasks which enable 
 An [Azure Storage Account](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-overview) contains all of your Azure Storage data objects: blobs, files, queues, tables, and disks. The table storage is a basic NoSQL database available on the Azure cloud. Simple document database for storing non-relational data. I will focus on that now.
 
 To install this extension, you need an organization on Azure DevOps portal. You can start [here](https://azure.microsoft.com/en-us/services/devops/?nav=min). On this portal, you have to have rights to install extensions. Then navigate [here](https://marketplace.visualstudio.com/items?itemName=meanin.storage-account-managment), or search for a `manage storage account release tools` in a release pipeline window like below:
-![img](img/2018-10-08-create-azure-storage-account-on-release-pipeline/add-tasks.png)
+![img](https://raw.githubusercontent.com/meanin/dev-to-articles/master/img/2018-10-08-create-azure-storage-account-on-release-pipeline/add-tasks.png)
 
 # Configure task
 
