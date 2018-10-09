@@ -7,7 +7,7 @@ tags: #devops #azure #microservices
 
 # Introduction
 
-Azure is a great cloud platform. Configuring CI/CD on an Azure DevOps is a really nice experience. You can create a build pipeline, where your software will be built and packaged into an installation artefact. You can also create a whole release pipeline. Usually only deploying the artefact to some `cloud` space. While I was playing with it, I miss some tasks which will prepare a brand new environment on my behalf.
+Azure is a cloud platform, that grows more and more popular. Configuring CI/CD on an Azure DevOps is a really nice experience. You can create a build pipeline, where your software will be built and packaged into an installation artefact. You can also create a whole release pipeline. Usually only deploying the artefact to some `cloud` space. While I was playing with it, I miss some tasks which will prepare a brand new environment on my behalf.
 
 Imagine that you can have multiple environments, consisting of a great number of services, each connected to different database. You are creating a new one and want to check if all others work well, that nothing is broken by the new one. I would create a whole new environment, deploy there infrastructure, deploy services and run unit tests, integration tests and regression tests to be sure, that all components are in a good health.
 
@@ -15,7 +15,7 @@ The parts that I cannot find on an Azure DevOps platform are tasks which enable 
 
 # Install extension
 
-An Azure Storage Account is a basic NoSQL database available on an Azure cloud. Simple document database for storing not relational data.
+An [Azure Storage Account](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-overview) contains all of your Azure Storage data objects: blobs, files, queues, tables, and disks. The table storage is a basic NoSQL database available on the Azure cloud. Simple document database for storing non-relational data. I will focus on that now.
 
 To install this extension, you need an organization on Azure DevOps portal. You can start [here](https://azure.microsoft.com/en-us/services/devops/?nav=min). On this portal, you have to have rights to install extensions. Then navigate [here](https://marketplace.visualstudio.com/items?itemName=meanin.storage-account-managment), or search for a `manage storage account release tools` in a release pipeline window like below:
 ![img](img/2018-10-08-create-azure-storage-account-on-release-pipeline/add-tasks.png)
