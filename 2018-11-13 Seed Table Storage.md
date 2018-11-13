@@ -7,7 +7,7 @@ tags: #devops #azure #microservices
 
 # Introduction
 
-I wrote a few sentence about an Azure Cloud [here](https://dev.to/meanin/create-azure-storage-account-on-release-pipeline-4kn4). When you are deploying an application, sometimes you need some basics data already be placed in a database. Some prerequisites, without which an application will work in a wrong manner. Seeding and migrating SQL databases in a .net world is a well described topic. If you know Entity Framework or Hibernate, you know where to start. What to do with this, when you want to store data in an Azure Table Storage?
+I wrote a few sentences about an Azure Cloud [here](https://dev.to/meanin/create-azure-storage-account-on-release-pipeline-4kn4). When you are deploying an application, sometimes you need some basics data already be placed in a database. Some prerequisites, without which an application will work in a wrong manner. Seeding and migrating SQL databases in a .net world is a well-described topic. If you know Entity Framework or Hibernate, you know where to start. What to do with this, when you want to store data in an Azure Table Storage?
 
 # Install extension
 
@@ -17,7 +17,7 @@ To install this extension, you need an organization on Azure DevOps portal. You 
 
 ![img](https://raw.githubusercontent.com/meanin/vsts-tasks/master/screenshots/seedtablestorage.png)
 
-To use this task you have to have a [configured](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=vsts#sep-azure-rm) Azure Resource Manager connection with a Service Principal. Set a storage account name and a table name which you want to seed. Select a json file location. File have to be a json list of flat object, which everyone contains at least two properties: PrimaryKey and RowKey.
+To use this task you have to have a [configured](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=vsts#sep-azure-rm) Azure Resource Manager connection with a Service Principal. Set a storage account name and a table name which you want to seed. Select a JSON file location. The file has to be a JArray of a flat object, which everyone contains at least two properties: PrimaryKey and RowKey.
 Here is a little example:
 ```
 [
@@ -48,4 +48,4 @@ Here is a little example:
 After release, table with data looks like below:
 ![img](https://raw.githubusercontent.com/meanin/dev-to-articles/master/img/2018-mm-dd-seed-table-storage/seed-table.png)
 
-This is first published version of this task. I will appreciate all feedback :)
+This is the first published version of this task. I will appreciate all feedback :)
