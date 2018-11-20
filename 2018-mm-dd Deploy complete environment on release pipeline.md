@@ -7,38 +7,44 @@ tags: #devops #azure #dotnetcore
 
 # Introduction
 
-I hope that everyone knows about the CI/CD processes. Continuous Integration helps teams work in parallel on the same project. The most common scenario is to use some git server and integrate work as a pull request from a feature branch to development one. Many tools provide an easy way to build an artefact (installation package) from a merged code base. Continuous deployment is a way to maintain application state with the newest code base on the desired environment.
+Continuous Integration helps teams work in parallel on the same project. The most common scenario is to use some git server and integrate work as a pull request from a feature branch to development one. Many tools provide an easy way to build an artefact (installation package) from a merged code base. Continuous deployment is a way to maintain application state with the newest code base on the desired environment.
 
 Imagine that before pushing new changes to production, you want to make all of the tests in a dedicated environment. Or maybe on every newly created environment you want to seed some data? Sometimes on this specific environment data stored/missing can introduce unnecessary bugs or unwanted situations which require your attention, before it can be considered as tested/usable.
 
 # Idea
 
-Now I came with an idea to create a brand new environment, just for testing purpose. In that way, you can always be sure, that there is no old data, but only data that is required to system work in the right way. Nothing will interfere with test cases, no blocker on a fresh start. 
+I came up with an idea on how to create a brand new environment, just for testing purposes. That way, you can always be sure, that there is no old data, but only data that is required for the system to work the right way. Nothing will interfere with test cases, no blocker on a fresh start. 
 
 I am using Microsoft Azure Cloud, as it is most familiar for me. In the simplest case, I want to create a storage (Azure table storage), pass its connection string to the key vault, seed data there and finally deploy an application which will consume the data.
 
 # Solution
 
 ### 1. Create a storage account
-There are few ways to create a storage account on Microsoft Azure Cloud. For a start, there is an Azure Portal - the web interface for managing your cloud resources. If you are more familiar with devops work, you would use [Azure Powershell](https://docs.microsoft.com/en-us/powershell/azure/overview?view=azurermps-6.12.0) (cross-platform right now) or [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest).
+There are few ways to create a storage account on Microsoft Azure Cloud. For a start, there is an Azure Portal - the web interface for managing your cloud resources. If you are more familiar with devops' work, you would use [Azure Powershell](https://docs.microsoft.com/en-us/powershell/azure/overview?view=azurermps-6.12.0) (cross-platform right now) or [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest).
 
-In my scenario, I want to integrate the storage account creation process with a continuous deployment process. I could write some powershell script and add it as a step for my CD definition. I can also write some custom extension for my CI/CD tool, which will give me a nice view for creating new storage account :) I am working with [Azure DevOps](https://azure.microsoft.com/en-us/services/devops/) (which is a successor of team services).
+In my scenario, I want to integrate the storage account creation process with a continuous deployment process. I could write some powershell script and add it as a step for my CD definition. I could also write some custom extension for my CI/CD tool, which would give me a nice view for creating new storage account :) I am working with [Azure DevOps](https://azure.microsoft.com/en-us/services/devops/) (which is a successor to Visual Studio Team Services). After some fights with diving into Azure Devops extension development, I end up with something like described on one of my previous posts:
+{% link https://dev.to/meanin/create-azure-storage-account-on-release-pipeline-4kn4 %}
 
-After some fights with diving into an azure evops extension development, I end up with something like described on one of my previous posts - [here](https://dev.to/meanin/create-azure-storage-account-on-release-pipeline-4kn4). It looks like below. Nice right? Instead of fighting with some powershell you can consume well-designed UI for creating the resource you need.
+It looks like below. Nice right? Instead of fighting with some powershell you can consume well-designed UI for creating the resource you need.
 ![img](https://raw.githubusercontent.com/meanin/vsts-tasks/master/screenshots/createstorageaccount.png)
 
 ### 2. Pass connection string to Key Vault
-Using a different database/storage in each environment could be difficult. One way is to use a dedicated configuration file for each environment, but then credentials are stored in a version control system. The second way is to configure dedicated hosting environment to have credentials stored there, but it creates a problem on configuring the new environment. It is needed to remember for all of the credentials that application will use before it even is deployed. 
+Using a different database/storage in each environment could be difficult. One way is to use a dedicated configuration file for each environment, but then credentials are stored in a version control system. The second way is to configure a dedicated hosting environment to have credentials stored there, but it creates a problem with configuring the new environment. It is needed to remember for all of the credentials that application will use before it even is deployed. 
 
 Happily, there is another way, which is my favourite. Store all of the necessary credentials outside of source control and fetch real values (override configuration file) on CD process. It can be done in a dedicated centralized storage for secrets. The Microsoft Azure Cloud provides a component that is called [Azure Key Vault](https://docs.microsoft.com/en-us/azure/key-vault/key-vault-overview). The Azure Devops portal provides an easy way to fetch data from a key vault, you can read more about it on [Microsoft docs](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/variable-groups?view=vsts&tabs=yaml).
 
-So I came up with an idea to push a connection string to my newly created Storage Account to the selected Key Vault during CD process, just after creation is completed. I didn't find any existing way to do that, besides inline powershell/CLI script. As previous, I believe that developers who work on a code base, shouldn't care about configuring deployment scripts. I decided to create another task for the Azure Devops, also described in a dedicated [post](https://dev.to/meanin/pass-storage-account-connection-string-to-key-vault-on-release-pipeline-1pkl). It looks like below:
+So I came up with an idea to push a connection string to my newly created Storage Account to the selected Key Vault during CD process, just after creation is completed. I didn't find any existing way to do that, besides inline powershell/CLI script. I decided to create another task for the Azure Devops, also described in a dedicated post:
+{% link https://dev.to/meanin/pass-storage-account-connection-string-to-key-vault-on-release-pipeline-1pkl %}
+
+As previous, I believe that developers who work on a code base, shouldn't care about configuring deployment scripts. It looks like below:
 ![img](https://raw.githubusercontent.com/meanin/vsts-tasks/master/screenshots/connectionstringtokeyvault.png)
 
 ### 3. Seed Table Storage
 Have you ever store data without which product won't work on a database side? Data that is not permanent, that mutate during application lifetime, so there is need to be stored in a DB, but without which application will not start. I imagine some user configuration values, defaults that are handled by admin, etc. For that case, usually missing part is seed functionality. Again I cannot find anything that works out of the box. 
 
-The more I get into developing the Azure Devops extension, the more idea for new tasks I find. Now I created one that helps to seed data into the Azure Table Storage. See [post](https://dev.to/meanin/seed-table-storage-10an). It needs an input JSON file, with predefined two fields which are ATS restriction - PartitionKey and RowKey. Any other field can names as needed by an application. The task configuration needs an Azure subscription, Storage Account Name, table name and of course path to seed file. In this case, it is a local JSON file.
+The more I get into developing the Azure Devops extension, the more idea for new tasks I find. Now I created one that helps to seed data into the Azure Table Storage. See my post:
+{% link https://dev.to/meanin/seed-table-storage-10an %}
+It needs an input JSON file, with predefined two fields which are ATS restriction - PartitionKey and RowKey. Any other field can names as needed by an application. The task configuration needs an Azure subscription, Storage Account Name, table name and of course path to seed file. In this case, it is a local JSON file.
 ![img](https://raw.githubusercontent.com/meanin/vsts-tasks/master/screenshots/seedtablestorage.png)
 
 ### 4. Application deployment
