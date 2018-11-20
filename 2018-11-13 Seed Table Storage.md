@@ -46,6 +46,6 @@ Here is a little example:
 ]
 ```
 After release, table with data looks like below:
-![img](https://raw.githubusercontent.com/meanin/dev-to-articles/master/img/2018-mm-dd-seed-table-storage/seed-table.png)
+![img](https://raw.githubusercontent.com/meanin/dev-to-articles/master/img/2018-11-13-seed-table-storage/seed-table.png)
 
 This is the first published version of this task. I will appreciate all feedback :)
