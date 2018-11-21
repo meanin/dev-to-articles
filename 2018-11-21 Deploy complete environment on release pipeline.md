@@ -1,6 +1,6 @@
 ---
-title: Deploy a complete environmnent
-published: false
+title: Deploy a complete environment
+published: true
 description: 
 tags: #devops #azure #dotnetcore
 ---
@@ -80,7 +80,7 @@ Also included is a seed.json file, which could be fetched from somewhere else, b
 ]
 ```
 A few minutes after triggering release, I saw this, brand new web application, displaying a table the source code base knows nothing about. Voila!
-![img](img/2018-mm-dd-deploy-complete-environment/deployed-application.png)
+![img](img/2018-11-21-deploy-complete-environment/deployed-application.png)
 
 # P.S.
 No, not PowerShell ;) If you have any needs to extend the Azure DevOps, with some shiny new deployment task, you can contact me :)
