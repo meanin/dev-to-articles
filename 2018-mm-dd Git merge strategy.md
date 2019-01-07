@@ -1,8 +1,8 @@
 ---
 title: What is your git merge strategy?
-published: false
+published: true
 tags: #git #help #bestpractices
-cover_image: https://raw.githubusercontent.com/meanin/dev-to-articles/master/img/2018-mm-dd-git-merge-strategy/git-flow.png
+cover_image: https://raw.githubusercontent.com/meanin/dev-to-articles/master/img/2019-01-07-git-merge-strategy/git-flow.png
 ---
 
 # Branching
@@ -16,7 +16,7 @@ The default strategy, for integrating changes into a root branch is merge operat
 
 # Squash
 There is an option while merging changes, to use `--squash`. You will end up with one merge commit, put on top of the root branch history. From my perspective, this method is really risky. When a team does not stick to the pull requests/branch naming convention, it can have dramatic consequences. Imagine going back in the repository history through commit named `update`, `align with newer version`, `test`, `more tests`, etc. This option will simplify history view, but it is only for mature teams.
-![squash](https://raw.githubusercontent.com/meanin/dev-to-articles/master/img/2018-mm-dd-git-merge-strategy/squash.png)
+![squash](https://raw.githubusercontent.com/meanin/dev-to-articles/master/img/2019-01-07-git-merge-strategy/squash.png)
 
 # Mix
 While I was doing a research for this article, I found [this](https://blog.carbonfive.com/2017/08/28/always-squash-and-rebase-your-git-commits/). A really nice mix of the merge and squash in a single approach. Again, here you will need a mature team, to follow the naming convention, but is a nice consensus.

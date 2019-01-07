@@ -80,7 +80,7 @@ Also included is a seed.json file, which could be fetched from somewhere else, b
 ]
 ```
 A few minutes after triggering release, I saw this, brand new web application, displaying a table the source code base knows nothing about. Voila!
-![img](img/2018-11-21-deploy-complete-environment/deployed-application.png)
+![img](https://raw.githubusercontent.com/meanin/dev-to-articles/master/img/2018-11-21-deploy-complete-environment/deployed-application.png)
 
 # P.S.
 No, not PowerShell ;) If you have any needs to extend the Azure DevOps, with some shiny new deployment task, you can contact me :)
