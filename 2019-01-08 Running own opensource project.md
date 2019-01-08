@@ -1,6 +1,6 @@
 ---
 title: Running own opensource project
-published: false
+published: true
 tags: #opensource #github
 ---
 
