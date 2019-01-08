@@ -8,7 +8,7 @@ I always wanted to start an opensource project. A year ago or so, I was trying, 
 
 # Change
 
-After I change my job, I started to have more challenging tasks. Few of them, make me create a PoC project, which I put on my [github](https://github.com/meanin). With time passing, I come back to writing on dev.to. In that time I create a [project](https://github.com/meanin/vsts-tasks) to support CI/CD processes on an Azure DevOps, also documented on this portal :). And then it comes to me - Let give it a try, again. So, I asked myself, is there anything which will help me in regular work, which I am missing? Recently, I started driving technical interviews. I was doing this by filling some excel files. It was annoying, ineffective etc. And that's how I found my idea for an opensource project.
+After I changed my job, I started to have more challenging tasks. Few of them, make me create a PoC project, which I put on my [github](https://github.com/meanin). With time passing, I come back to writing on dev.to. In that time I create a [project](https://github.com/meanin/vsts-tasks) to support CI/CD processes on an Azure DevOps, also documented on this portal :). And then it comes to me - Let give it a try, again. So, I asked myself, is there anything which will help me in regular work, which I am missing? Recently, I started driving technical interviews. I was doing this by filling some excel files. It was annoying, ineffective etc. And that's how I found my idea for an opensource project.
 
 # Technology
 
